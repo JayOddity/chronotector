@@ -11,6 +11,7 @@ import {
   type ClassTalentData,
   type WeaponTree,
 } from '@/data/talent-calculator';
+import GamePanel from '@/components/GamePanel';
 
 type NodeLevels = Record<number, number>;
 
@@ -595,50 +596,41 @@ function InfoPanel({ weapon, levels, classData }: {
   const slug = CLASS_SLUG[classData.classKey] || classData.classKey.toLowerCase();
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-3">
       {/* Weapon name + silhouette bg */}
-      <div className="relative overflow-hidden rounded-lg p-5" style={{
-        background: 'linear-gradient(135deg, rgba(45,45,45,0.9) 0%, rgba(45,45,45,0.95) 100%)',
-        border: '1px solid rgba(200,168,78,0.15)',
-        minHeight: 140,
-      }}>
+      <GamePanel padding="p-4" className="overflow-hidden" style={{ minHeight: 120 }}>
         {/* Background weapon icon (large, faded) */}
         {wepIcon && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={`/images/game-icons/weapons/${wepIcon}.png`}
             alt=""
-            className="absolute right-[-20px] top-[-10px] opacity-[0.06]"
+            className="absolute right-[-20px] top-[-10px] opacity-[0.06] z-0"
             style={{ width: 180, height: 180, filter: 'brightness(2)', pointerEvents: 'none' }}
           />
         )}
-        <div className="relative z-10">
-          <div className="font-heading text-2xl text-accent-gold mb-1">{weapon.displayName}</div>
-          <div className="text-[12px] text-text-muted mb-4">{classData.displayName}</div>
+        <div className="font-heading text-2xl text-accent-gold mb-1">{weapon.displayName}</div>
+        <div className="text-[12px] text-text-muted mb-4">{classData.displayName}</div>
 
-          {/* Mastery Level progress */}
-          <div className="text-[11px] text-text-muted mb-1.5">
-            Mastery Level <span className="text-accent-gold font-bold">{totalSpent}</span>
-            <span className="text-text-muted">/{maxPossible}</span>
-          </div>
-          <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(50,50,50,0.5)' }}>
-            <div
-              className="h-full rounded-full transition-all duration-300"
-              style={{
-                width: maxPossible > 0 ? `${(totalSpent / maxPossible) * 100}%` : '0%',
-                background: 'linear-gradient(90deg, #8a6e2f, #c8a84e, #e0c068)',
-              }}
-            />
-          </div>
+        {/* Mastery Level progress */}
+        <div className="text-[11px] text-text-muted mb-1.5">
+          Mastery Level <span className="text-accent-gold font-bold">{totalSpent}</span>
+          <span className="text-text-muted">/{maxPossible}</span>
         </div>
-      </div>
+        <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(50,50,50,0.5)' }}>
+          <div
+            className="h-full rounded-full transition-all duration-300"
+            style={{
+              width: maxPossible > 0 ? `${(totalSpent / maxPossible) * 100}%` : '0%',
+              background: 'linear-gradient(90deg, #8a6e2f, #c8a84e, #e0c068)',
+            }}
+          />
+        </div>
+      </GamePanel>
 
       {/* Special Move */}
       {specialNode && (
-        <div className="rounded-lg p-4" style={{
-          background: 'rgba(45,45,45,0.7)',
-          border: '1px solid rgba(200,168,78,0.12)',
-        }}>
+        <GamePanel padding="p-4">
           <div className="text-[11px] text-text-muted uppercase tracking-wider mb-3 font-heading">Special Move</div>
           <div className="flex items-center gap-3">
             <div style={{
@@ -673,14 +665,11 @@ function InfoPanel({ weapon, levels, classData }: {
               )}
             </div>
           </div>
-        </div>
+        </GamePanel>
       )}
 
       {/* Equipped Skills */}
-      <div className="rounded-lg p-4" style={{
-        background: 'rgba(45,45,45,0.7)',
-        border: '1px solid rgba(200,168,78,0.12)',
-      }}>
+      <GamePanel padding="p-4">
         <div className="text-[11px] text-text-muted uppercase tracking-wider mb-3 font-heading">Equipped Skills</div>
         <div className="grid grid-cols-4 gap-2">
           {Array.from({ length: 4 }).map((_, i) => {
@@ -713,13 +702,10 @@ function InfoPanel({ weapon, levels, classData }: {
             ))}
           </div>
         )}
-      </div>
+      </GamePanel>
 
       {/* Class portrait */}
-      <div className="rounded-lg overflow-hidden" style={{
-        border: '1px solid rgba(200,168,78,0.12)',
-        background: 'rgba(45,45,45,0.7)',
-      }}>
+      <GamePanel padding="p-0" className="overflow-hidden">
         <div className="relative" style={{ height: 120 }}>
           <Image
             src={`/images/game-icons/classes/${slug}-portrait.png`}
@@ -728,12 +714,12 @@ function InfoPanel({ weapon, levels, classData }: {
             className="object-cover opacity-30"
           />
           <div className="absolute inset-0 flex items-end p-3" style={{
-            background: 'linear-gradient(transparent, rgba(45,45,45,0.9))',
+            background: 'linear-gradient(transparent, rgba(20,18,28,0.9))',
           }}>
             <span className="font-heading text-lg text-accent-gold">{classData.displayName}</span>
           </div>
         </div>
-      </div>
+      </GamePanel>
     </div>
   );
 }
@@ -886,7 +872,7 @@ export default function TalentCalculator() {
   const totalWeaponPoints = useMemo(() => classData.weapons.reduce((sum, wep) => sum + wep.nodes.reduce((s, n) => s + (nodeLevels[n.id] || 0), 0), 0), [classData, nodeLevels]);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
 
       {/* Class Selector */}
       <div className="flex flex-wrap gap-1.5">
@@ -954,11 +940,8 @@ export default function TalentCalculator() {
       {/* Main layout: Tree/Mastery (left) + Info Panel (right) */}
       <div className="flex gap-5">
         {/* Tree or Class Mastery area */}
-        <div className="flex-1 rounded-lg border border-border-subtle overflow-y-auto" style={{
-          background: 'linear-gradient(135deg, #2d2d2d 0%, #282828 50%, #2d2d2d 100%)',
-          maxHeight: '85vh',
-        }}>
-          <div className="p-4 sm:p-6">
+        <GamePanel padding="p-0" className="flex-1">
+          <div className="p-3 sm:p-4">
             {showClassMastery ? (
               <ClassMasterySection classData={classData} selectedMastery={selectedMastery} onToggle={handleToggleMastery} />
             ) : (
@@ -971,7 +954,7 @@ export default function TalentCalculator() {
               />
             )}
           </div>
-        </div>
+        </GamePanel>
 
         {/* Right info panel */}
         <div className="w-[280px] shrink-0 hidden lg:block">
@@ -981,7 +964,7 @@ export default function TalentCalculator() {
 
       {/* Build Summary */}
       {(Object.values(nodeLevels).some(v => v > 0) || selectedMastery.size > 0) && (
-        <div className="rounded-lg border border-border-subtle p-4" style={{ background: 'rgba(45,45,45,0.6)' }}>
+        <GamePanel padding="p-4">
           <h3 className="font-heading text-sm text-accent-gold mb-3">Build Summary</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {classData.weapons.map(wep => {
@@ -1030,7 +1013,7 @@ export default function TalentCalculator() {
               </div>
             )}
           </div>
-        </div>
+        </GamePanel>
       )}
     </div>
   );

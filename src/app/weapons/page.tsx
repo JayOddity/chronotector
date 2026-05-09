@@ -3,6 +3,8 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { classes } from '@/data/classes';
 import { pageMetadata } from '@/lib/metadata';
+import GamePanel from '@/components/GamePanel';
+import SectionHeader from '@/components/SectionHeader';
 
 const WEAPON_ICONS: Record<string, string> = {
   'Wrist Blades': '/images/game-icons/weapons/TX_ClassIcon_WristBlades.png',
@@ -47,22 +49,17 @@ export default function WeaponsPage() {
       </section>
 
       {classes.map((cls) => (
-        <section key={cls.slug} className="py-8">
-          <div className="flex items-baseline justify-between mb-4 flex-wrap gap-2">
-            <h2 className="font-heading text-2xl text-accent-gold">
-              <Link href={`/classes/${cls.slug}`} className="hover:text-accent-gold-dim transition-colors">
-                {cls.name}
-              </Link>
-            </h2>
-            <span className="text-xs text-text-muted uppercase tracking-wider">{cls.role}</span>
-          </div>
+        <section key={cls.slug} className="py-6">
+          <SectionHeader title={cls.name} />
+          <p className="text-center text-[11px] text-text-muted uppercase tracking-[0.25em] -mt-3 mb-5">
+            <Link href={`/classes/${cls.slug}`} className="hover:text-accent-gold transition-colors">
+              {cls.role}
+            </Link>
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {cls.weapons.map((w) => (
-              <div
-                key={w.name}
-                className="bg-card-bg border border-border-subtle rounded-lg p-5 hover:border-accent-gold-dim/50 transition-colors flex flex-col"
-              >
-                <div className="flex items-center gap-3 mb-2">
+              <GamePanel key={w.name} padding="p-5" className="flex flex-col">
+                <div className="flex items-center gap-3 mb-3">
                   {WEAPON_ICONS[w.name] && (
                     <Image
                       src={WEAPON_ICONS[w.name]}
@@ -77,6 +74,7 @@ export default function WeaponsPage() {
                     <div className="text-xs text-text-muted uppercase tracking-wider mt-0.5">{w.tagline}</div>
                   </div>
                 </div>
+                <div className="game-rule mb-3" />
                 <p className="text-text-secondary text-sm leading-relaxed flex-1">{w.description}</p>
                 <Link
                   href={`/classes/${cls.slug}`}
@@ -84,7 +82,7 @@ export default function WeaponsPage() {
                 >
                   {cls.name} class &rarr;
                 </Link>
-              </div>
+              </GamePanel>
             ))}
           </div>
         </section>

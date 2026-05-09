@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { dungeonTypes } from '@/data/dungeons';
 import { pageMetadata } from '@/lib/metadata';
+import GamePanel from '@/components/GamePanel';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Dungeons',
@@ -53,7 +54,7 @@ export default function DungeonsPage() {
 
       <section className="py-8 space-y-6">
         {cleanedDungeonTypes.map((dt) => (
-          <div key={dt.type} className="bg-card-bg border border-border-subtle rounded-lg p-6">
+          <GamePanel key={dt.type} padding="p-6">
             <div className="flex items-baseline justify-between mb-2 flex-wrap gap-2">
               <h2 className="font-heading text-xl text-accent-gold">{dt.label}</h2>
               <span className="text-xs text-text-muted">{dt.entries.length} {dt.entries.length === 1 ? 'instance' : 'instances'}</span>
@@ -65,14 +66,14 @@ export default function DungeonsPage() {
               </summary>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-3">
                 {dt.entries.map((e) => (
-                  <div key={e.name} className="bg-dark-surface border border-border-subtle rounded p-2 text-sm flex justify-between gap-2">
+                  <div key={e.name} className="bg-black/40 border border-[rgba(200,168,78,0.25)] rounded p-2 text-sm flex justify-between gap-2">
                     <span className="text-text-secondary truncate">{displayName(e.name)}</span>
                     <span className="text-xs text-text-muted shrink-0">{e.max === 1 ? 'Solo' : `1-${e.max}p`}</span>
                   </div>
                 ))}
               </div>
             </details>
-          </div>
+          </GamePanel>
         ))}
       </section>
     </div>

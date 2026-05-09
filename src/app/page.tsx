@@ -6,6 +6,7 @@ import { sanityClient, urlFor } from '@/lib/sanity';
 import { pageMetadata } from '@/lib/metadata';
 import JsonLd from '@/components/JsonLd';
 import { videoGameSchema } from '@/lib/schema';
+import GameCorners from '@/components/GameCorners';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Chronotector | Chrono Odyssey News, Database, Map',
@@ -65,6 +66,10 @@ function getSteamImage(contents: string, index: number = 0): string {
   return STEAM_FALLBACK_IMAGES[index % STEAM_FALLBACK_IMAGES.length];
 }
 
+// Shared box style: purple outline, slightly rounded, hover lifts to brighter purple
+const boxClass =
+  'border border-[rgba(90,61,128,0.5)] hover:border-[rgba(106,77,144,0.8)] rounded-lg transition-colors';
+
 export default async function HomePage() {
   const [sanityNews, steamNews] = await Promise.all([
     sanityClient.fetch<SanityNews[]>(
@@ -112,34 +117,34 @@ export default async function HomePage() {
       <section className="mb-12">
         <h2 className="font-heading text-xl text-accent-gold mb-4">Things to Check Out</h2>
         <div className="grid grid-cols-3 gap-4">
-          <Link href="/#news" className="group relative aspect-video rounded-lg overflow-hidden border border-border-subtle hover:border-accent-gold-dim transition-colors">
+          <Link href="/#news" className={`${boxClass} group relative aspect-video overflow-hidden`}>
             <Image src={STEAM_FALLBACK_IMAGES[1]} alt="News" fill priority className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="33vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <span className="absolute bottom-3 left-3 font-heading text-2xl text-white">News</span>
           </Link>
-          <Link href="/classes" className="group relative aspect-video rounded-lg overflow-hidden border border-border-subtle hover:border-accent-gold-dim transition-colors">
+          <Link href="/classes" className={`${boxClass} group relative aspect-video overflow-hidden`}>
             <Image src="/images/home/classes-card.avif" alt="Classes" fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="33vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <span className="absolute bottom-3 left-3 font-heading text-2xl text-white">Classes</span>
           </Link>
-          <Link href="/features/combat" className="group relative aspect-video rounded-lg overflow-hidden border border-border-subtle hover:border-accent-gold-dim transition-colors">
+          <Link href="/features/combat" className={`${boxClass} group relative aspect-video overflow-hidden`}>
             <Image src="/images/home/combat-card.avif" alt="Combat" fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="33vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <span className="absolute bottom-3 left-3 font-heading text-2xl text-white">Combat</span>
           </Link>
         </div>
         <div className="grid grid-cols-3 gap-4 mt-4">
-          <Link href="/release-date" className="group relative aspect-video rounded-lg overflow-hidden border border-border-subtle hover:border-accent-gold-dim transition-colors">
+          <Link href="/release-date" className={`${boxClass} group relative aspect-video overflow-hidden`}>
             <Image src={STEAM_FALLBACK_IMAGES[3]} alt="Release Date" fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="33vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <span className="absolute bottom-3 left-3 font-heading text-2xl text-white">Release Date</span>
           </Link>
-          <Link href="/world/lore" className="group relative aspect-video rounded-lg overflow-hidden border border-border-subtle hover:border-accent-gold-dim transition-colors">
+          <Link href="/world/lore" className={`${boxClass} group relative aspect-video overflow-hidden`}>
             <Image src="/images/world/soroma-stronghold.avif" alt="World & Lore" fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="33vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <span className="absolute bottom-3 left-3 font-heading text-2xl text-white">World & Lore</span>
           </Link>
-          <a href="https://store.steampowered.com/app/2873440/Chrono_Odyssey/" target="_blank" rel="noopener noreferrer" className="group relative aspect-video rounded-lg overflow-hidden border border-border-subtle hover:border-accent-gold-dim transition-colors">
+          <a href="https://store.steampowered.com/app/2873440/Chrono_Odyssey/" target="_blank" rel="noopener noreferrer" className={`${boxClass} group relative aspect-video overflow-hidden`}>
             <Image src={STEAM_FALLBACK_IMAGES[0]} alt="Steam" fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="33vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/95 to-black/70" />
             <div className="absolute inset-0 flex flex-col items-center justify-center">
@@ -154,7 +159,7 @@ export default async function HomePage() {
 
       {/* Latest News - Sanity + Steam merged */}
       <section id="news" className="mb-12 scroll-mt-20">
-        <h1 className="font-heading text-2xl text-accent-gold mb-6">Latest News</h1>
+        <h2 className="font-heading text-xl text-accent-gold mb-4">Latest News</h2>
 
         {feed.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -171,9 +176,9 @@ export default async function HomePage() {
                     </div>
                   )}
                   <div className="p-4 flex flex-col flex-1">
-                    <h2 className="text-sm font-medium text-text-primary group-hover:text-accent-gold transition-colors line-clamp-2 mb-2">
+                    <h3 className="text-sm font-medium text-text-primary group-hover:text-accent-gold transition-colors line-clamp-2 mb-2">
                       {item.title}
-                    </h2>
+                    </h3>
                     {item.excerpt && (
                       <p className="text-xs text-text-muted line-clamp-2 mb-3 flex-1">{item.excerpt}</p>
                     )}
@@ -196,14 +201,14 @@ export default async function HomePage() {
               );
 
               return (
-                <Link key={item.id} href={item.href} className="flex flex-col bg-card-bg border border-border-subtle rounded-lg overflow-hidden hover:border-accent-gold-dim transition-colors glow-gold-hover group">
+                <Link key={item.id} href={item.href} className={`${boxClass} bg-card-bg flex flex-col overflow-hidden group`}>
                   {card}
                 </Link>
               );
             })}
           </div>
         ) : (
-          <div className="bg-card-bg border border-border-subtle rounded-lg p-8 text-center">
+          <div className={`${boxClass} bg-card-bg p-8 text-center`}>
             <p className="text-text-muted">No news available right now.</p>
           </div>
         )}
@@ -217,12 +222,20 @@ export default async function HomePage() {
             <Link
               key={name}
               href={`/classes/${name.toLowerCase()}`}
-              className="flex flex-col items-center bg-card-bg border border-border-subtle rounded-lg p-4 hover:border-accent-gold-dim transition-colors glow-gold-hover group"
+              className="game-panel flex flex-col items-center p-4 glow-gold-hover group transition-colors"
             >
-              <div className="w-10 h-10 rounded-full bg-dark-surface border border-border-subtle mb-2 flex items-center justify-center">
-                <span className="font-heading text-accent-gold text-lg">{name[0]}</span>
+              <GameCorners />
+              <div className="relative z-[1] w-20 h-20 rounded-full overflow-hidden bg-black/40 border border-[rgba(200,168,78,0.4)] mb-3 shadow-[inset_0_0_18px_rgba(0,0,0,0.55)]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(200,168,78,0.12),transparent_70%)] z-[1]" />
+                <Image
+                  src={`/images/classes/${name.toLowerCase()}.webp`}
+                  alt={name}
+                  fill
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                  sizes="80px"
+                />
               </div>
-              <span className="font-heading text-sm text-text-primary group-hover:text-accent-gold transition-colors">
+              <span className="relative z-[1] font-heading text-sm text-text-primary group-hover:text-accent-gold transition-colors">
                 {name}
               </span>
             </Link>

@@ -108,7 +108,7 @@ export default function Header({ siteName }: HeaderProps) {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#13131a]/95 backdrop-blur">
+    <header className="sticky top-0 z-50 bg-[#15121b]/95 backdrop-blur">
       {/* Top bar: Logo + Search */}
       <div className="border-b border-border-subtle">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">

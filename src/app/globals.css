@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --void-black: #1a1a22;
-  --deep-night: #22222c;
-  --dark-surface: #2a2a38;
-  --card-bg: #26263a;
-  --border-subtle: #3a3a54;
+  --void-black: #1c1923;
+  --deep-night: #25212d;
+  --dark-surface: #2e2738;
+  --card-bg: #2c2438;
+  --border-subtle: #483b58;
   --accent-gold: #c8a84e;
   --accent-gold-light: #e0c068;
   --accent-gold-dim: #8a6e2f;
+  --accent-purple: #5a3d80;
+  --accent-purple-dim: #3d2a55;
   --accent-red: #c43a3a;
   --accent-red-light: #e05555;
   --parchment: #ffffff;
@@ -59,7 +61,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-cinzel), serif;
 }
 
-/* Diamond divider */
+/* Section divider — symmetric purple lines (formerly the gold-diamond divider) */
 .diamond-divider {
   display: flex;
   align-items: center;
@@ -71,13 +73,11 @@ h1, h2, h3, h4, h5, h6 {
   content: '';
   height: 1px;
   flex: 1;
-  background: linear-gradient(90deg, transparent, var(--accent-gold-dim), transparent);
+  background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
 }
+/* Site-wide rule: no yellow/gold diamonds. Any legacy `.diamond` element is hidden. */
 .diamond-divider .diamond {
-  width: 8px;
-  height: 8px;
-  background: var(--accent-gold);
-  transform: rotate(45deg);
+  display: none;
 }
 
 /* Glow effects */
@@ -101,4 +101,134 @@ h1, h2, h3, h4, h5, h6 {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-gold-dim);
+}
+
+/* ===== In-game panel chrome (pilot) ===== */
+
+/* Slate panel: textured stone bg, inset shadow, hairline gold border */
+.game-panel {
+  position: relative;
+  background-color: #0d0d10;
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(200, 168, 78, 0.08), transparent 60%),
+    url('/images/ui/panels/panel-bg.png');
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(200, 168, 78, 0.35);
+  box-shadow:
+    inset 0 0 60px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(200, 168, 78, 0.08),
+    0 8px 28px rgba(0, 0, 0, 0.55);
+  isolation: isolate;
+}
+
+/* Optional compass-rose seal watermark */
+.game-panel--seal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/ui/panels/panel-seal.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: min(420px, 55%);
+  opacity: 0.06;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Gold L-shaped corner accents — saturated mid-gold, slightly brighter than the panel's outer hairline */
+.game-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  z-index: 2;
+}
+.game-corner--tl {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--accent-gold);
+  border-left: 2px solid var(--accent-gold);
+}
+.game-corner--tr {
+  top: -1px;
+  right: -1px;
+  border-top: 2px solid var(--accent-gold);
+  border-right: 2px solid var(--accent-gold);
+}
+.game-corner--bl {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 2px solid var(--accent-gold);
+  border-left: 2px solid var(--accent-gold);
+}
+.game-corner--br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--accent-gold);
+  border-right: 2px solid var(--accent-gold);
+}
+
+/* Decorative gold arc band (sits flush above a panel header) */
+.game-arc {
+  width: 100%;
+  height: 56px;
+  background-image: url('/images/ui/panels/panel-arc.png');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 720px auto;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* Vignette frame for class/weapon imagery */
+.game-frame {
+  position: relative;
+  background-color: #0a0a0d;
+  background-image: url('/images/ui/panels/panel-vignette.png');
+  background-size: 100% 100%;
+  background-position: center;
+  padding: 14px;
+}
+
+/* Gold hairline rule */
+.game-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+  opacity: 0.45;
+}
+
+/* Section header — symmetric purple line / TITLE / purple line */
+.game-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.game-section-header::before,
+.game-section-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+}
+.game-section-header__title {
+  margin: 0;
+  font-family: var(--font-cinzel), serif;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Inside a panel, dividers/headers switch to gold instead of purple */
+.game-panel .game-section-header::before,
+.game-panel .game-section-header::after,
+.game-panel .diamond-divider::before,
+.game-panel .diamond-divider::after {
+  background: linear-gradient(90deg, transparent, var(--accent-gold-dim), transparent) !important;
 }

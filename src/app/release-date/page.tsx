@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { pageMetadata } from '@/lib/metadata';
+import GamePanel from '@/components/GamePanel';
+import SectionHeader from '@/components/SectionHeader';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Release Date',
@@ -16,13 +18,13 @@ export default function ReleaseDatePage() {
       </section>
 
       <section className="py-8 space-y-6">
-        <div className="bg-card-bg border border-border-subtle rounded-lg p-6">
-          <h2 className="font-heading text-2xl text-accent-gold mb-3">Q1 2027</h2>
+        <GamePanel padding="p-6">
+          <SectionHeader title="Q1 2027" />
           <p className="text-text-secondary leading-relaxed">
             Chrono Odyssey is currently scheduled for Q1 2027 according to Kakao Games&apos; quarterly report. The game was previously targeting Q4 2026 but was postponed to allow more time to implement feedback from the June 2025 closed beta.
           </p>
           <figure className="mt-5">
-            <div className="relative w-full overflow-hidden rounded-md border border-border-subtle">
+            <div className="relative w-full overflow-hidden rounded-md border border-[rgba(200,168,78,0.25)]">
               <Image
                 src="/images/release-date/kakao-earnings-q1-2027.avif"
                 alt="Kakao Games earnings presentation slide listing Chrono Odyssey with a Q1 2027 release target"
@@ -37,22 +39,22 @@ export default function ReleaseDatePage() {
               Source: Kakao Games earnings presentation Q1 2027 target for Chrono Odyssey.
             </figcaption>
           </figure>
-        </div>
+        </GamePanel>
 
-        <div className="bg-card-bg border border-border-subtle rounded-lg p-6">
-          <h2 className="font-heading text-2xl text-accent-gold mb-3">Platforms</h2>
+        <GamePanel padding="p-6">
+          <SectionHeader title="Platforms" />
           <p className="text-text-secondary leading-relaxed">
             PC (Steam and Epic Games), PlayStation 5, Xbox Series X.
           </p>
-        </div>
+        </GamePanel>
 
-        <div className="bg-card-bg border border-border-subtle rounded-lg p-6">
-          <h2 className="font-heading text-2xl text-accent-gold mb-3">Closed Beta</h2>
+        <GamePanel padding="p-6">
+          <SectionHeader title="Closed Beta" />
           <p className="text-text-secondary leading-relaxed">
             The first closed beta ran June 20-22, 2025 on Steam. It drew over 65,000 players at peak with mixed reception. Kakao Games stated that the CBT &ldquo;really helped us to understand and recognize the high level of interest and positive anticipation that&apos;s building up in the Western market&rdquo; and decided to &ldquo;further dial up the game&apos;s level of completeness&rdquo; even with additional development time required.
           </p>
           <figure className="mt-5">
-            <div className="relative w-full overflow-hidden rounded-md border border-border-subtle">
+            <div className="relative w-full overflow-hidden rounded-md border border-[rgba(200,168,78,0.25)]">
               <Image
                 src="/images/release-date/beta-stats.avif"
                 alt="Kakao Games CBT statistics infographic listing top weapons, most defeated monsters, average playtime, and most popular area"
@@ -66,17 +68,17 @@ export default function ReleaseDatePage() {
               CBT statistics published by Kakao Games. Source: Developer&rsquo;s Notes #1 (Apr 2025).
             </figcaption>
           </figure>
-        </div>
+        </GamePanel>
 
-        <div className="bg-card-bg border border-border-subtle rounded-lg p-6">
-          <h2 className="font-heading text-2xl text-accent-gold mb-3">Post Beta Development</h2>
+        <GamePanel padding="p-6">
+          <SectionHeader title="Post Beta Development" />
           <p className="text-text-secondary leading-relaxed">
             Since the beta, the developers have published four sets of Developer&apos;s Notes detailing improvements to hit feedback, animations, control feel, enemy behaviour, and graphical quality. Multiple focus group tests have taken place in the home market. A second closed beta is expected before launch.
           </p>
-        </div>
+        </GamePanel>
 
-        <div className="bg-card-bg border border-border-subtle rounded-lg p-6">
-          <h2 className="font-heading text-2xl text-accent-gold mb-3">Timeline</h2>
+        <GamePanel padding="p-6">
+          <SectionHeader title="Timeline" />
           <ul className="space-y-3 text-text-secondary">
             <li className="flex items-start gap-3">
               <span className="text-accent-gold font-heading text-sm shrink-0 w-28 text-right mt-0.5">Jun 2025</span>
@@ -95,7 +97,7 @@ export default function ReleaseDatePage() {
               <span>Current target launch (PC, PS5, Xbox Series X)</span>
             </li>
           </ul>
-        </div>
+        </GamePanel>
       </section>
     </div>
   );

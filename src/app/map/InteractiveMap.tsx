@@ -1705,6 +1705,45 @@ export default function InteractiveMap({
 
           <rect width={MAP_WIDTH} height={MAP_HEIGHT} fill="#413b35" />
           {(() => {
+            // Always-mounted low-LOD backdrop. Stays painted across LOD
+            // switches in the active layer, so the brief gap when active
+            // tiles remount is filled with a slightly blurry version of
+            // the same map instead of a black GPU repaint flash.
+            // Stable keys (no LOD) — these never unmount.
+            const tileRegion = MAP_TILES.setar;
+            if (!tileRegion) return null;
+            const baseLod = tileRegion.zoomLevels[0];
+            const GRID = 1 << baseLod;
+            const wxStep = (atlasCal.worldMaxX - atlasCal.worldMinX) / GRID;
+            const wyStep = (atlasCal.worldMaxY - atlasCal.worldMinY) / GRID;
+            const tiles: React.ReactNode[] = [];
+            for (let gy = 0; gy < GRID; gy++) {
+              for (let gx = 0; gx < GRID; gx++) {
+                const tl = worldToScreen(
+                  atlasCal.worldMinX + gx * wxStep,
+                  atlasCal.worldMinY + gy * wyStep,
+                );
+                const br = worldToScreen(
+                  atlasCal.worldMinX + (gx + 1) * wxStep,
+                  atlasCal.worldMinY + (gy + 1) * wyStep,
+                );
+                tiles.push(
+                  <image
+                    key={`base-${gx}-${gy}`}
+                    href={`${tileRegion.publicPath}/z${baseLod}/${gx}_${gy}.webp`}
+                    x={tl.x}
+                    y={tl.y}
+                    width={br.x - tl.x}
+                    height={br.y - tl.y}
+                    preserveAspectRatio="none"
+                    opacity={atlasEdit || pinningLandmark ? 0.55 : 0.92}
+                  />,
+                );
+              }
+            }
+            return <>{tiles}</>;
+          })()}
+          {(() => {
             // Render the game's tile pyramid as the backdrop.
             // LOD is chosen so that each tile renders at ~source resolution
             // (512 px), and tiles outside the visible SVG region are culled

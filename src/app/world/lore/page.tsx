@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { factions } from '@/data/world';
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/metadata';
+import GamePanel from '@/components/GamePanel';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Lore',
@@ -24,11 +25,11 @@ export default function LorePage() {
 
       <section className="py-8 space-y-6">
         {factions.map((faction) => (
-          <div key={faction.name} className="bg-card-bg border border-border-subtle rounded-lg p-6">
+          <GamePanel key={faction.name} padding="p-6">
             <h2 className={`font-heading text-2xl ${faction.colour} mb-2`}>{faction.name}</h2>
             <p className="text-accent-gold-dim italic mb-4">&ldquo;{faction.tagline}&rdquo;</p>
             <p className="text-text-secondary leading-relaxed">{faction.description}</p>
-          </div>
+          </GamePanel>
         ))}
       </section>
     </div>

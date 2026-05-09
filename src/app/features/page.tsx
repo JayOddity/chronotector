@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { features } from '@/data/features';
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/metadata';
+import GameCorners from '@/components/GameCorners';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Features',
@@ -25,12 +26,13 @@ export default function FeaturesPage() {
             <Link
               key={feature.slug}
               href={`/features/${feature.slug}`}
-              className="flex flex-col bg-card-bg border border-border-subtle rounded-lg p-6 hover:border-accent-gold-dim transition-colors glow-gold-hover group"
+              className="game-panel flex flex-col p-6 transition-colors glow-gold-hover group"
             >
-              <h2 className="font-heading text-xl text-text-primary group-hover:text-accent-gold transition-colors mb-2">
+              <GameCorners />
+              <h2 className="relative z-[1] font-heading text-xl text-text-primary group-hover:text-accent-gold transition-colors mb-2">
                 {feature.name}
               </h2>
-              <p className="text-sm text-text-muted">{feature.tagline}</p>
+              <p className="relative z-[1] text-sm text-text-muted">{feature.tagline}</p>
             </Link>
           ))}
         </div>

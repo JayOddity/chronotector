@@ -3,6 +3,9 @@ import Link from 'next/link';
 import { pageMetadata } from '@/lib/metadata';
 import JsonLd from '@/components/JsonLd';
 import { faqPageSchema, breadcrumbSchema } from '@/lib/schema';
+import GamePanel from '@/components/GamePanel';
+import GameCorners from '@/components/GameCorners';
+import SectionHeader from '@/components/SectionHeader';
 
 export const metadata: Metadata = pageMetadata({
   title: 'FAQ',
@@ -183,9 +186,10 @@ export default function FaqPage() {
         {faq.map((item, i) => (
           <details
             key={i}
-            className="group rounded-lg bg-card-bg border border-border-subtle open:border-accent-gold-dim transition-colors"
+            className="game-panel group transition-colors p-0"
           >
-            <summary className="flex items-center justify-between gap-3 px-5 py-4 cursor-pointer list-none select-none">
+            <GameCorners />
+            <summary className="relative z-[1] flex items-center justify-between gap-3 px-5 py-4 cursor-pointer list-none select-none">
               <h3 className="font-heading text-lg text-text-primary group-open:text-accent-gold transition-colors">
                 {item.q}
               </h3>
@@ -203,7 +207,7 @@ export default function FaqPage() {
                 />
               </svg>
             </summary>
-            <div className="px-5 pb-4 pt-0 text-text-secondary text-base leading-relaxed">
+            <div className="relative z-[1] px-5 pb-4 pt-0 text-text-secondary text-base leading-relaxed">
               {item.a}
             </div>
           </details>
@@ -212,17 +216,17 @@ export default function FaqPage() {
 
       {/* System Requirements */}
       <section id="system-requirements" className="mt-12 scroll-mt-24">
-        <h2 className="font-heading text-3xl text-accent-gold mb-2">System Requirements</h2>
+        <SectionHeader title="System Requirements" />
         <p className="text-text-muted mb-4 text-sm">
           Official PC specs as listed on the Steam store page. Subject to change before
           launch.
         </p>
 
         {/* Desktop table */}
-        <div className="bg-card-bg border border-border-subtle rounded-lg overflow-hidden hidden sm:block">
+        <GamePanel padding="p-0" className="overflow-hidden hidden sm:block">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-border-subtle">
+              <tr className="border-b border-[rgba(200,168,78,0.2)]">
                 <th className="text-left p-4 font-heading text-accent-gold text-sm">
                   Component
                 </th>
@@ -236,7 +240,7 @@ export default function FaqPage() {
             </thead>
             <tbody>
               {specs.map((row) => (
-                <tr key={row.label} className="border-b border-border-subtle last:border-0">
+                <tr key={row.label} className="border-b border-[rgba(200,168,78,0.12)] last:border-0">
                   <td className="p-4 text-text-primary font-medium">{row.label}</td>
                   <td className="p-4 text-text-secondary">{row.minimum}</td>
                   <td className="p-4 text-text-secondary">{row.recommended}</td>
@@ -244,11 +248,11 @@ export default function FaqPage() {
               ))}
             </tbody>
           </table>
-        </div>
+        </GamePanel>
 
         {/* Mobile cards */}
         <div className="sm:hidden space-y-4">
-          <div className="bg-card-bg border border-border-subtle rounded-lg p-5">
+          <GamePanel padding="p-5">
             <h3 className="font-heading text-lg text-accent-gold mb-4">Minimum</h3>
             <dl className="space-y-3">
               {specs.map((row) => (
@@ -260,8 +264,8 @@ export default function FaqPage() {
                 </div>
               ))}
             </dl>
-          </div>
-          <div className="bg-card-bg border border-border-subtle rounded-lg p-5">
+          </GamePanel>
+          <GamePanel padding="p-5">
             <h3 className="font-heading text-lg text-accent-gold mb-4">Recommended</h3>
             <dl className="space-y-3">
               {specs.map((row) => (
@@ -273,7 +277,7 @@ export default function FaqPage() {
                 </div>
               ))}
             </dl>
-          </div>
+          </GamePanel>
         </div>
       </section>
     </main>

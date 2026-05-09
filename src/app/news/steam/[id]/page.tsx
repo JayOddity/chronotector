@@ -60,7 +60,7 @@ export default async function SteamNewsPostPage({
   const dateLabel = formatSteamDate(item.date);
 
   return (
-    <article className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+    <article className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <Link
         href="/#news"
         className="text-sm text-text-muted hover:text-accent-gold transition-colors inline-flex items-center gap-1 mb-6"

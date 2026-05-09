@@ -29,12 +29,16 @@ export default function ClassesPage() {
             <Link
               key={cls.slug}
               href={`/classes/${cls.slug}`}
-              className="flex flex-col bg-card-bg border border-border-subtle rounded-lg overflow-hidden hover:border-accent-gold-dim transition-colors glow-gold-hover group"
+              className="game-panel flex flex-col overflow-hidden glow-gold-hover group transition-colors"
             >
-              <div className="relative aspect-square bg-dark-surface overflow-hidden">
+              <span className="game-corner game-corner--tl" />
+              <span className="game-corner game-corner--tr" />
+              <span className="game-corner game-corner--bl" />
+              <span className="game-corner game-corner--br" />
+              <div className="relative aspect-square bg-black/30 overflow-hidden">
                 <Image src={cls.image} alt={cls.name} fill className="object-contain object-top group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
               </div>
-              <div className="p-5">
+              <div className="p-5 relative z-[1]">
                 <h2 className="font-heading text-xl text-text-primary group-hover:text-accent-gold transition-colors mb-1">
                   {cls.name}
                 </h2>
@@ -42,7 +46,7 @@ export default function ClassesPage() {
                 <p className="text-sm text-text-muted line-clamp-3">{cls.description}</p>
                 <div className="flex gap-2 mt-3">
                   {cls.weapons.map((w) => (
-                    <span key={w.name} className="text-xs px-2 py-1 bg-dark-surface border border-border-subtle rounded text-text-muted">
+                    <span key={w.name} className="text-xs px-2 py-1 bg-black/40 border border-[rgba(200,168,78,0.4)] rounded text-text-muted">
                       {w.name}
                     </span>
                   ))}

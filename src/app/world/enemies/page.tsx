@@ -3,6 +3,8 @@ import { factions } from '@/data/world';
 import { bestiary, monsterSouls, type EnemyGrade } from '@/data/bestiary';
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/metadata';
+import GamePanel from '@/components/GamePanel';
+import SectionHeader from '@/components/SectionHeader';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Enemies',
@@ -96,25 +98,25 @@ export default function EnemiesPage() {
 
       {/* Faction lore */}
       <section className="py-8 space-y-6">
-        <h2 className="font-heading text-2xl text-accent-gold mb-2">Hostile Factions</h2>
+        <SectionHeader title="Hostile Factions" />
         {enemyFactionLore.map((faction) => (
-          <div key={faction.name} className="bg-card-bg border border-border-subtle rounded-lg p-6">
+          <GamePanel key={faction.name} padding="p-6">
             <h3 className={`font-heading text-xl ${faction.colour} mb-2`}>{faction.name}</h3>
             <p className="text-accent-gold-dim italic text-sm mb-3">&ldquo;{faction.tagline}&rdquo;</p>
             <p className="text-text-secondary leading-relaxed">{faction.description}</p>
-          </div>
+          </GamePanel>
         ))}
       </section>
 
       {/* Monster Souls */}
       <section className="py-8">
-        <h2 className="font-heading text-2xl text-accent-gold mb-2">Monster Souls</h2>
+        <SectionHeader title="Monster Souls" />
         <p className="text-text-muted text-sm mb-4 max-w-3xl">
           Slaying certain creatures lets you bind their soul as a summonable specter that fights alongside you. Currently five souls have been datamined.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {monsterSouls.map((soul) => (
-            <div key={soul.name} className="bg-card-bg border border-border-subtle rounded-lg p-5">
+            <GamePanel key={soul.name} padding="p-5">
               <div className="flex items-baseline justify-between mb-2">
                 <h3 className="font-heading text-lg text-accent-gold">{soul.name}</h3>
                 <span className="text-xs text-text-muted">Lv. {soul.level} &middot; {soul.grade}</span>
@@ -124,7 +126,7 @@ export default function EnemiesPage() {
                 <span>ATK <span className="text-text-primary">{soul.attack}</span></span>
                 <span>HP <span className="text-text-primary">{soul.hp.toLocaleString()}</span></span>
               </div>
-            </div>
+            </GamePanel>
           ))}
         </div>
       </section>
@@ -132,7 +134,7 @@ export default function EnemiesPage() {
       {/* Bestiary */}
       <section className="py-8 space-y-8">
         <div>
-          <h2 className="font-heading text-2xl text-accent-gold mb-2">Bestiary</h2>
+          <SectionHeader title="Bestiary" />
           <p className="text-text-muted text-sm max-w-3xl">
             Grouped by faction. Bosses surface first (World &gt; Mid &gt; Field), then Elites, then standard mobs. Variant suffixes (e.g. &ldquo;1.2&rdquo; difficulty tiers) collapsed into the strongest version.
           </p>
@@ -144,7 +146,7 @@ export default function EnemiesPage() {
           const elites = cleaned.filter((e) => e.grade === 'Elite');
           const normals = cleaned.filter((e) => e.grade === 'Normal');
           return (
-            <div key={faction.key} className="bg-card-bg border border-border-subtle rounded-lg p-6">
+            <GamePanel key={faction.key} padding="p-6">
               <h3 className="font-heading text-xl text-accent-gold mb-1">{faction.name}</h3>
               <p className="text-text-muted text-sm mb-4">{faction.description}</p>
 
@@ -188,7 +190,7 @@ export default function EnemiesPage() {
                   </div>
                 </details>
               )}
-            </div>
+            </GamePanel>
           );
         })}
       </section>
