@@ -25,7 +25,7 @@ const SITE_URL = "https://chronotector.com";
 const SITE_DESCRIPTION = "Chrono Odyssey MMO News & Guides";
 
 export const metadata: Metadata = {
-  title: { default: SITE_NAME, template: `%s | ${SITE_NAME}` },
+  title: { default: SITE_NAME, template: `%s - Chrono Odyssey | ${SITE_NAME}` },
   description: SITE_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
   applicationName: SITE_NAME,

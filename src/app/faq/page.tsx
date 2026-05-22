@@ -172,7 +172,7 @@ export default function FaqPage() {
         ]}
       />
       <header className="pt-4 pb-8">
-        <h1 className="font-heading text-4xl text-accent-gold mb-2">FAQ</h1>
+        <h1 className="font-heading text-4xl text-accent-gold mb-2">Chrono Odyssey FAQ</h1>
         <p className="text-text-muted">
           Answers to the most common questions about Chrono Odyssey. System requirements
           are listed at the bottom.

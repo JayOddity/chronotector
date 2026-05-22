@@ -87,7 +87,7 @@ export default function EnemiesPage() {
         <Link href="/world" className="text-sm text-accent-gold-dim hover:text-accent-gold transition-colors mb-4 inline-block">
           &larr; World
         </Link>
-        <h1 className="font-heading text-4xl text-accent-gold mb-4">Enemies</h1>
+        <h1 className="font-heading text-4xl text-accent-gold mb-4">Chrono Odyssey Enemies</h1>
         <p className="text-text-secondary max-w-3xl">
           A datamined catalogue of the hostile creatures, bandits, and otherworldly horrors of Setera. Names are extracted from the game files and may change before launch.
         </p>

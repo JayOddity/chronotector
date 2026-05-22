@@ -29,7 +29,7 @@ export function pageMetadata({
   noindex = false,
 }: PageMetaInput): Metadata {
   const url = `${SITE_URL}${path}`;
-  const ogTitle = absoluteTitle ? title : `${title} | ${SITE_NAME}`;
+  const ogTitle = absoluteTitle ? title : `${title} - Chrono Odyssey | ${SITE_NAME}`;
 
   return {
     title: absoluteTitle ? { absolute: title } : title,

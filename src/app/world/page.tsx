@@ -10,7 +10,7 @@ import SectionHeader from '@/components/SectionHeader';
 
 export const metadata: Metadata = pageMetadata({
   title: 'World',
-  description: 'The world of Setera: regions, factions, and notable locations.',
+  description: 'The world of Setera in Chrono Odyssey: regions, factions, and notable locations.',
   path: '/world',
 });
 

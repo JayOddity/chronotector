@@ -14,7 +14,7 @@ export default function ClassesPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <section className="pt-8 pb-4">
-        <h1 className="font-heading text-4xl text-accent-gold mb-4">Classes</h1>
+        <h1 className="font-heading text-4xl text-accent-gold mb-4">Chrono Odyssey Classes</h1>
         <p className="text-text-secondary max-w-3xl">
           Chrono Odyssey features six playable classes, each with three weapons swappable mid combat on a 0.25s cooldown. Each weapon has eight abilities (four active at a time). Classes use unique resources: Rage, Vigor, Mana, Bloodlust, and Arrows.
         </p>

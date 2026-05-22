@@ -17,7 +17,7 @@ export default function LorePage() {
         <Link href="/world" className="text-sm text-accent-gold-dim hover:text-accent-gold transition-colors mb-4 inline-block">
           &larr; World
         </Link>
-        <h1 className="font-heading text-4xl text-accent-gold mb-4">Lore</h1>
+        <h1 className="font-heading text-4xl text-accent-gold mb-4">Chrono Odyssey Lore</h1>
         <div className="diamond-divider mt-6">
           <span className="diamond" />
         </div>

@@ -5,7 +5,7 @@ import GamePanel from '@/components/GamePanel';
 
 export const metadata: Metadata = pageMetadata({
   title: 'Dungeons',
-  description: 'Expeditions, raids, labyrinths, trials and Chrono Gates of Setera.',
+  description: 'Dungeon types in Chrono Odyssey: expeditions, raids, labyrinths, trials, and the Chrono Gates of Setera.',
   path: '/dungeons',
 });
 
@@ -40,7 +40,7 @@ export default function DungeonsPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <section className="pt-8 pb-4">
-        <h1 className="font-heading text-4xl text-accent-gold mb-4">Dungeons</h1>
+        <h1 className="font-heading text-4xl text-accent-gold mb-4">Chrono Odyssey Dungeons</h1>
         <p className="text-text-secondary max-w-3xl mb-2">
           Chrono Odyssey&rsquo;s instanced content spans solo trials, party expeditions, and a single raid. Most named dungeons fall into one of the categories below.
         </p>

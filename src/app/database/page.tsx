@@ -144,7 +144,7 @@ export default async function DatabasePage({
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-6">
-        <h1 className="font-heading text-3xl text-accent-gold mb-2">Database</h1>
+        <h1 className="font-heading text-3xl text-accent-gold mb-2">Chrono Odyssey Database</h1>
         <p className="text-text-muted text-sm">
           {type === 'items' && `${items.length.toLocaleString()} items datamined from the Chrono Odyssey closed beta (June 2025). `}
           {type === 'enemies' && `${enemyCount.toLocaleString()} creatures with an open world spawn, from the June 2025 CBT data. `}

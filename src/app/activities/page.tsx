@@ -21,7 +21,7 @@ export default function ActivitiesPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <section className="pt-8 pb-4">
-        <h1 className="font-heading text-4xl text-accent-gold mb-4">Activities</h1>
+        <h1 className="font-heading text-4xl text-accent-gold mb-4">Chrono Odyssey Activities</h1>
         <p className="text-text-secondary max-w-3xl">
           Beyond combat and crafting, Setera is set up to host a handful of life skill systems and player utilities. Kakao hasn&rsquo;t fully detailed any of these yet what&rsquo;s below is what we&rsquo;ve seen demonstrated in beta footage.
         </p>

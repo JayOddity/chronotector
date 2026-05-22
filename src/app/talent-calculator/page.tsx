@@ -14,7 +14,7 @@ export default function TalentCalculatorPage() {
   return (
     <main className="max-w-[1400px] mx-auto px-4 sm:px-6 py-3">
       <h1 className="font-heading text-2xl sm:text-3xl text-accent-gold mb-3">
-        Talent Calculator
+        Chrono Odyssey Talent Calculator
       </h1>
       <Suspense fallback={<div className="text-text-muted text-sm">Loading calculator…</div>}>
         <TalentCalculator />

@@ -14,7 +14,7 @@ export default function ReleaseDatePage() {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <section className="pt-8 pb-4">
-        <h1 className="font-heading text-4xl text-accent-gold mb-4">Release Date</h1>
+        <h1 className="font-heading text-4xl text-accent-gold mb-4">Chrono Odyssey Release Date</h1>
       </section>
 
       <section className="py-8 space-y-6">
